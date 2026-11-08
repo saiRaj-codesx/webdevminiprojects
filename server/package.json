@@ -1,0 +1,25 @@
+{
+  "name": "tool-rent",
+  "version": "1.0.0",
+  "description": "ToolX-ToolRent Web App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.21.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0",
+    "mysql2": "^3.24.6",
+    "react-router-dom": "^7.18.5",
+    "sequelize": "^6.37.8"
+  }
+}
