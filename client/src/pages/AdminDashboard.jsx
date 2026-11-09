@@ -8,6 +8,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [confirmDeleteToolId, setConfirmDeleteToolId] = useState(null);
+  const [confirmDeleteUserId, setConfirmDeleteUserId] = useState(null);
 
   // Fetch all tools and users on mount
 
@@ -39,14 +41,24 @@ export default function AdminDashboard() {
   }, []);
 
   const handleDeleteTool = async (id) => {
+    // 1. Reset alert messages before starting request
+    setError("");
+    setSuccessMessage("");
+
     try {
+      // 2. Perform backend API delete call
       await API.delete(`/admin/tools/${id}`);
-      setTools(tools.filter((tool) => tool.id !== id));
+
+      // 3. Remove the deleted tool from local state
+      setTools((prevTools) => prevTools.filter((tool) => tool.id !== id));
+
+      // 4. Set success message and clear after 3 seconds
       setSuccessMessage("Tool deleted successfully.");
-      setConfirmDeleteToolId(null);
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
+      console.error("Delete error:", err);
       setError(err.response?.data?.message || "Failed to delete tool.");
+      setTimeout(() => setError(""), 3000);
     }
   };
 

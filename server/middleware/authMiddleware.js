@@ -1,6 +1,5 @@
 // Middleware to check if user is logged in using JWT
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "my_super_secret_key_123"; // In a real app this goes in .env, but keeping it simple for C-DAC
 
 const verifyToken = function (req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -19,7 +18,7 @@ const verifyToken = function (req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // <-- Updated to use env variable!
     req.user = decoded; // Saving user info (id, role) in request object
     next(); // Move to the next function/route
   } catch (err) {
